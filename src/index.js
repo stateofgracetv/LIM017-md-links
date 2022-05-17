@@ -6,14 +6,15 @@
 // import { path, sep } from 'path';
 const path = require('path');
 const fs = require('fs');
-const { isAbsolute } = require('path');
+const { argv } = require('node:process');
+const pathToFile = argv[2];
 
-console.log(`El separador en mi Sistema Operativo es: ${path.sep}`);
+console.log('is absolute: ' + path.isAbsolute(pathToFile));
 
 function absolutify(route) {
-  let absolute = 'hola mundo';
+  let absolute = '';
   path.isAbsolute(route) ? absolute = route : absolute = path.resolve(route);
   return absolute;
 }
 
-console.log(absolutify('index.js'));
+console.log(absolutify(pathToFile));
