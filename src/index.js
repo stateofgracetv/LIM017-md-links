@@ -9,8 +9,6 @@ const fs = require('fs');
 const { argv } = require('node:process');
 const pathToFile = argv[2];
 
-console.log('is absolute: ' + path.isAbsolute(pathToFile));
-
 function absolutify(route) {
   let absolute = '';
   path.isAbsolute(route) ? absolute = route : absolute = path.resolve(route);
