@@ -1,7 +1,6 @@
-const mdLinks = require('../');
+import { absolutify } from '../src/md-links.js'
 
-
-describe('mdLinks', () => {
+describe('absolutify', () => {
 
   it('should...', () => {
     console.log('FIX ME!');
