@@ -5,8 +5,8 @@ export const absolutify = (route) => path.isAbsolute(route) ? route : path.resol
 
 export const pathExists = (route) => fs.existsSync(route);
 
-export const isFile = (route) => fs.statSync(route).isFile();
-
 export const isDirectory = (route) => fs.statSync(route).isDirectory();
+
+export const isFile = (route) => fs.statSync(route).isFile();
 
 export const isMd = (route) => path.extname(route) === '.md';
