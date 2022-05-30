@@ -11,15 +11,26 @@ export const isFile = (route) => fs.statSync(route).isFile();
 
 export const isMd = (route) => path.extname(route) === '.md';
 
-export const scanDir = (dir) => {
-    const directory = fs.readdirSync(dir);
-    console.log('inside ' + dir);
-    directory.forEach(el => {
-        const filePath = path.join(dir, el);
-        console.log(filePath);
-        if (isDirectory(filePath)) scanDir(filePath);
-        else if (isMd(filePath)) searchForLinks(filePath);
-    })
+let mdArray = [];
+export const saveMd = (md) => {
+    mdArray.push(md);
+    console.log('md array: ' + mdArray);
+    return mdArray;
 }
 
-export const searchForLinks = (route) => console.log('seaching for links...');
+export const scanDir = (route) => {
+    fs.readdirSync(route).forEach(el => {
+        const filePath = path.join(route, el);
+        console.log(filePath);
+        if (isDirectory(filePath)) {
+            scanDir(filePath);
+        } else {
+            saveMd(filePath);
+        }
+    });
+    return mdArray;
+}
+
+const extractLinks = (array) => {
+    // read file match map slice concat
+}
