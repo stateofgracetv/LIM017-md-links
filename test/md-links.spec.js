@@ -1,4 +1,4 @@
-import { absolutify, pathExists, isDirectory, isFile, isMd, scanDir } from '../src/utils.js'
+import { absolutify, pathExists, isDirectory, isFile, isMd, scanDir, extractLinks } from '../src/utils.js'
 
 describe('absolutify', () => {
 
@@ -61,14 +61,16 @@ describe('isMd', () => {
 describe('scanDir', () => {
 
   const mdFiles = ['C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples\\example-3.md', 'C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples\\example-dir\\example-4.md', 'C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples\\example2.md'];
-  /* it('should return an array', () => {
-    expect(typeof scanDir('C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples')).toBe(Array);
-  }) */
-  /* it('should return an array', () => {
-    expect(scanDir('C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples')).toBe('["meow", "wow"]');
-  }) */
   it('should return an array of .md files', () => {
     expect(scanDir('C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples')).toEqual(expect.arrayContaining(mdFiles));
+  })
+
+});
+
+describe('extractLinks', () => {
+
+  it('should ', () => {
+    expect(extractLinks('')).to;
   })
 
 })

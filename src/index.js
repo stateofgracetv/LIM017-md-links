@@ -1,4 +1,4 @@
-import { absolutify, pathExists, isFile, isMd, isDirectory, scanDir, /* searchForLinks, */  saveMd } from './utils.js'
+import { absolutify, pathExists, isFile, isMd, isDirectory, scanDir, saveMd, extractLinks } from './utils.js'
 
 export function mdLinks (argument) {
     const absoluteRoute = absolutify(argument);
@@ -7,10 +7,8 @@ export function mdLinks (argument) {
 
     if (isDirectory(absoluteRoute)) {
         console.log('is dir: ' + isDirectory(absoluteRoute));
-        scanDir(absoluteRoute);
+        scanDir(absoluteRoute).map(extractLinks);
     } else if (isFile(absoluteRoute) && isMd(absoluteRoute)) {
-        saveMd(absoluteRoute);
-        // extractLinks(absoluteRoute);
+        saveMd(absoluteRoute).map(extractLinks);
     }
-    // const arrayOfLinks = mdArray.map(extractLinks)
 }

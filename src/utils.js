@@ -31,6 +31,8 @@ export const scanDir = (route) => {
     return mdArray;
 }
 
-const extractLinks = (array) => {
+export const extractLinks = (file) => {
+    const data = fs.readFileSync(file, {encoding:'utf8', flag:'r'});
+    console.log(data);
     // read file match map slice concat
 }
