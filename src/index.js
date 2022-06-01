@@ -1,6 +1,6 @@
 import { absolutify, pathExists, isFile, isMd, isDirectory, scanDir, saveMd, extractLinks } from './utils.js'
 
-export function mdLinks (argument) {
+export const mdLinks = (argument) => {
     const absoluteRoute = absolutify(argument);
     console.log(absoluteRoute);
     console.log('exists: ' + pathExists(absoluteRoute));

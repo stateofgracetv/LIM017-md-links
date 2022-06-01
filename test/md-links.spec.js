@@ -69,8 +69,20 @@ describe('scanDir', () => {
 
 describe('extractLinks', () => {
 
-  it('should ', () => {
-    expect(extractLinks('')).to;
+  const linkArray = [
+    {
+      file: 'C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\example.md',
+      href: 'https://developer.mozilla.org/es/docs/Web/HTTP/Overview',
+      text: 'Generalidades del protocolo HTTP - MDN'
+    },
+    {
+      file: 'C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\example.md',
+      href: 'https://developer.mozilla.org/es/docs/Web/HTTP/Messages',
+      text: 'Mensajes HTTP - MDN'
+    }
+  ]
+  it('should return an array of objects describing each a link', () => {
+    expect(extractLinks('C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\example.md')).toEqual(expect.arrayContaining(linkArray));
   })
 
 })
