@@ -1,5 +1,6 @@
 import path from 'path';
-import fs, { link } from 'fs';
+import fs from 'fs';
+// import { chalk } from 'chalk';
 
 export const absolutify = (route) => path.isAbsolute(route) ? route : path.resolve(route);
 
@@ -11,22 +12,25 @@ export const isFile = (route) => fs.statSync(route).isFile();
 
 export const isMd = (route) => path.extname(route) === '.md';
 
-let mdArray = [];
+export let mdArray = [];
 export const saveMd = (md) => {
     mdArray.push(md);
     return mdArray;
 }
 
 export const scanDir = (route) => {
-    fs.readdirSync(route).forEach(el => {
+    const dirList = fs.readdirSync(route);
+    if (dirList.length < 1) {
+        return 'empty';
+    }
+    dirList.forEach(el => {
         const filePath = path.join(route, el);
         if (isDirectory(filePath)) {
             scanDir(filePath);
-        } else {
+        } else if (isMd(filePath)) {
             saveMd(filePath);
         }
     });
-    // console.log(mdArray);
     return mdArray;
 }
 
@@ -50,9 +54,8 @@ export const extractLinks = (file) => {
                 'text': text
             };
             result.push(myObject);
-            console.log(file, href, text);
-        })
-        // console.log(result);
+        });
+        console.log(result);
         return result;
     }
 }
