@@ -34,7 +34,7 @@ export const scanDir = (route) => {
     return mdArray;
 }
 
-/* export const extractLinks = (file) => {
+export const extractLinks = (file) => {
     const data = fs.readFileSync(file, {encoding:'utf8', flag:'r'});
     const masterExp = /\[([^\[]+)\]\(http?(.*)\)/gm;
     const linkExp = /http?([^\)]*)/gm;
@@ -54,41 +54,8 @@ export const scanDir = (route) => {
                 'text': text
             };
             result.push(myObject);
-            // console.log(chalk.bold(file), chalk.cyan(href), chalk.bgWhite.black(text));
-            // console.log(file, href, text);
         });
         console.log(result);
         return result;
     }
-} */
-
-export const extractLinks = (array) => {
-    array.forEach(file => {
-        const data = fs.readFileSync(file, {encoding:'utf8', flag:'r'});
-        const masterExp = /\[([^\[]+)\]\(http?(.*)\)/gm;
-        const linkExp = /http?([^\)]*)/gm;
-        const textExp = /(?<=\[).*(?=\])/gm;
-        const arrayOfLinks = data.match(masterExp);
-        let result = [];
-        if (!arrayOfLinks) {
-            return;
-        }
-        else {
-            arrayOfLinks.forEach(e => {
-                const href = e.match(linkExp).toString();
-                const text = e.match(textExp).toString();
-                const myObject = {
-                    'file': file,
-                    'href': href,
-                    'text': text
-                };
-                result.push(myObject);
-                // console.log(chalk.bold(file), chalk.cyan(href), chalk.bgWhite.black(text));
-                // console.log(file, href, text);
-            });
-            // console.log(result);
-            return result;
-        }
-    })
-    
 }

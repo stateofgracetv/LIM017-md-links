@@ -8,15 +8,9 @@ export const mdLinks = (route, options) => new Promise ((resolve, reject) => {
     }
 
     if (isDirectory(absoluteRoute)) {
-        // resolve(scanDir(absoluteRoute).map(extractLinks));
-        console.log(extractLinks(scanDir(absoluteRoute)));
-        /* scanDir(absoluteRoute).map(extractLinks).forEach(e => {
-            console.log('holi');
-            console.log(e.file, e.href, e.text);
-        }) */
+        resolve(scanDir(absoluteRoute).map(extractLinks));
     } else if (isFile(absoluteRoute) && isMd(absoluteRoute)) {
         resolve(saveMd(absoluteRoute).map(extractLinks));
-        console.log(saveMd(absoluteRoute).map(extractLinks));
     }
 
     if (mdArray.length < 1) {
