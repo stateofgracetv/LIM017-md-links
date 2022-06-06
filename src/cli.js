@@ -5,7 +5,6 @@
 }; */
 
 import { mdLinks } from "./index.js";
-import { extractedLinks } from "./utils.js";
 const pathToFile = process.argv[2] ;
 
 try {

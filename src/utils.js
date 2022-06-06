@@ -13,7 +13,7 @@ export const isMd = (route) => path.extname(route) === '.md';
 
 export const scanDir = (route) => {
     const dirList = fs.readdirSync(route);
-    if (dirList.length < 1) {
+    if (!dirList) {
         return;
     }
     let links;
@@ -35,7 +35,7 @@ export const extractLinks = (file) => {
     const linkExp = /http?([^\)]*)/gm;
     const textExp = /(?<=\[).*(?=\])/gm;
     const arrayOfLinks = data.match(masterExp);
-    if (arrayOfLinks.length < 1) {
+    if (!arrayOfLinks) {
         return;
     }
     else {
