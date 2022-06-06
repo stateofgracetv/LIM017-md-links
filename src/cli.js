@@ -4,10 +4,14 @@
   // ...
 }; */
 
-// import { path, sep } from 'path';
-// const { argv } = require('node:process');
-// const pathToFile = argv[2];
-
 import { mdLinks } from "./index.js";
+import { extractedLinks } from "./utils.js";
 const pathToFile = process.argv[2] ;
-mdLinks(pathToFile);
+
+try {
+  mdLinks(pathToFile)
+    .then(extractedLinks => console.log(extractedLinks))
+    .catch(error => console.log(`Error detected! ${error}`));
+} catch (error) {
+  console.log(`Caught by try/catch ${error}`);
+}

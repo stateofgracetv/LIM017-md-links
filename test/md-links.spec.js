@@ -58,15 +58,6 @@ describe('isMd', () => {
   
 });
 
-describe('scanDir', () => {
-
-  const mdFiles = ['C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples\\example-3.md', 'C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples\\example-dir\\example-4.md', 'C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples\\example2.md'];
-  it('should return an array of .md files', () => {
-    expect(scanDir('C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples')).toEqual(expect.arrayContaining(mdFiles));
-  })
-
-});
-
 describe('extractLinks', () => {
 
   const linkArray = [
