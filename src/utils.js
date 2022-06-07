@@ -60,24 +60,17 @@ export const validateMyLinks = (links) => {
     console.log('validating');
     links.forEach(e => {
         fetch(e.href).then(Response => {
-            console.log('dis is fech')
-            const myStatus = Response.status;
-            if (myStatus === 200) {
-                const okStatus = 'ok';
-            } else {
-                const okStatus = 'fail';
+            const okResponse = Response.ok === true ? 'ok' : 'fail';
+            const validatedObject = {
+                'file': e.file,
+                'href': e.href,
+                'ok': okResponse,
+                'status': Response.status,
+                'text': e.text
             }
-        })
-        const validatedObject = {
-            'file': e.file,
-            'href': e.href,
-            'ok': okStatus,
-            'status': myStatus,
-            'text': e.text
-        }
-        console.log(validatedObject);
-        console.log('hi');
-        validatedLinks.push(validatedObject);
+            console.log(validatedObject);
+            validatedLinks.push(validatedObject);
+        });
     });
     return validatedLinks;
 }
