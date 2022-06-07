@@ -1,5 +1,4 @@
 import { absolutify, pathExists, isFile, isMd, isDirectory, scanDir, extractLinks, extractedLinks } from './utils.js'
-import chalk from 'chalk';
 
 export const mdLinks = (route, options) => new Promise ((resolve, reject) => {
     const absoluteRoute = absolutify(route);
