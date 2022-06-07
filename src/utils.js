@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import fetch from 'node-fetch';
 
 export const absolutify = (route) => path.isAbsolute(route) ? route : path.resolve(route);
 
@@ -51,4 +52,32 @@ export const extractLinks = (file) => {
         });
         return extractedLinks;
     }
+}
+
+let validatedLinks = [];
+// recibe como argumento extractedLinks
+export const validateMyLinks = (links) => {
+    console.log('validating');
+    links.forEach(e => {
+        fetch(e.href).then(Response => {
+            console.log('dis is fech')
+            const myStatus = Response.status;
+            if (myStatus === 200) {
+                const okStatus = 'ok';
+            } else {
+                const okStatus = 'fail';
+            }
+        })
+        const validatedObject = {
+            'file': e.file,
+            'href': e.href,
+            'ok': okStatus,
+            'status': myStatus,
+            'text': e.text
+        }
+        console.log(validatedObject);
+        console.log('hi');
+        validatedLinks.push(validatedObject);
+    });
+    return validatedLinks;
 }

@@ -42,6 +42,7 @@
   },
   "homepage": "https://github.com/stateofgracetv/LIM017-md-links#readme",
   "dependencies": {
-    "chalk": "^5.0.1"
+    "chalk": "^5.0.1",
+    "node-fetch": "^3.2.5"
   }
 }
