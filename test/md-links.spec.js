@@ -78,3 +78,28 @@ describe('extractLinks', () => {
   })
 
 })
+
+describe('scanDir', () => {
+
+  const expectedArray = [
+    {
+      file: 'C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples\\example-dir\\example-4.md',
+      href: 'https://developer.mozilla.org/es/docs/Web/HTTP/Messages',
+      text: 'Mensajes HTTP - MDN'
+    },
+    {
+      file: 'C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples\\example-dir\\example-4.md',
+      href: 'http://invalid.com/nonexistent',
+      text: 'This link does not work'
+    },
+    {
+      file: 'C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples\\example2.md',
+      href: 'https://open.spotify.com/playlist/0Y6tCCoBS71sJSVLtlYgkY',
+      text: 'Taylor Swift for newbies'
+    }
+  ]
+  it('should return all links present in the directory', () => {
+    expect(scanDir('C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples')).toEqual(expect.arrayContaining(expectedArray));
+  })
+
+})
