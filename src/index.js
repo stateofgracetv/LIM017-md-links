@@ -31,16 +31,8 @@ export const mdLinks = (route, validate) => new Promise ((resolve, reject) => {
                 throw new Error('Path is not an .md file');
             }
     }
-    
 
     if (extractedLinks.length < 1) {
         throw new Error('No links were found');
     }
-
-    /* if (validate) {
-        const validatedLinks = validateMyLinks(extractedLinks)
-        // resolve
-        .then(validatedLinks => console.log(validatedLinks))
-        .catch(err => console.log(err))
-    } */
 });
