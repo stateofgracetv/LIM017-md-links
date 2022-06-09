@@ -54,23 +54,19 @@ export const extractLinks = (file) => {
     }
 }
 
-let validatedLinks = [];
-// recibe como argumento extractedLinks
-export const validateMyLinks = (links) => {
-    console.log('validating');
-    links.forEach(e => {
-        fetch(e.href).then(Response => {
-            const okResponse = Response.ok === true ? 'ok' : 'fail';
+export const validateMyLinks = (arrLinks) => {
+    const arrPromises = arrLinks.map((obj) => fetch(obj.href)
+        .then(Response => {
             const validatedObject = {
-                'file': e.file,
-                'href': e.href,
-                'ok': okResponse,
+                'file': obj.file,
+                'href': obj.href,
+                'ok': Response.statusText,
                 'status': Response.status,
-                'text': e.text
-            }
-            console.log(validatedObject);
-            validatedLinks.push(validatedObject);
-        });
-    });
-    return validatedLinks;
+                'text': obj.text
+            };
+            return validatedObject;
+        })
+        .catch(err => console.log(err))
+    )
+    return Promise.all(arrPromises);
 }
