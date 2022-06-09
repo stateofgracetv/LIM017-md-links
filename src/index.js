@@ -1,11 +1,11 @@
 import { absolutify, pathExists, isFile, isMd, isDirectory, scanDir, extractLinks, extractedLinks, validateMyLinks } from './utils.js'
 
-export const mdLinks = (route, validate, stats) => new Promise ((resolve, reject) => {
+export const mdLinks = (route, validate) => new Promise ((resolve, reject) => {
     const absoluteRoute = absolutify(route);
     if (!pathExists(absoluteRoute)) {
         throw new Error("Invalid: Path does not exist");
     }
-
+    
     if (isDirectory(absoluteRoute)) {
         resolve(scanDir(absoluteRoute));
     } else if (isFile(absoluteRoute) && isMd(absoluteRoute)) {
@@ -19,6 +19,9 @@ export const mdLinks = (route, validate, stats) => new Promise ((resolve, reject
     }
 
     if (validate) {
-        validateMyLinks(extractedLinks);
+        const validatedLinks = validateMyLinks(extractedLinks)
+        // resolve
+        .then(validatedLinks => console.log(validatedLinks))
+        .catch(err => console.log(err))
     }
 });

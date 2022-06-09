@@ -1,4 +1,5 @@
 import { absolutify, pathExists, isDirectory, isFile, isMd, scanDir, extractLinks } from '../src/utils.js'
+jest.mock('node-fetch', () => jest.fn());
 
 describe('absolutify', () => {
 
