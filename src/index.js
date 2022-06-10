@@ -6,30 +6,24 @@ export const mdLinks = (route, validate) => new Promise ((resolve, reject) => {
         throw new Error("Invalid: Path does not exist");
     }
     
+    let rawLinks;
+    if (isDirectory(absoluteRoute)) {
+        rawLinks = scanDir(absoluteRoute);
+    } else if (isFile(absoluteRoute) && isMd(absoluteRoute)) {
+        rawLinks = extractLinks(absoluteRoute);
+    } else if (isFile(absoluteRoute) && !isMd(absoluteRoute)) {
+        throw new Error('Path is not an .md file');
+    }
+
     switch (validate) {
         case false:
-            if (isDirectory(absoluteRoute)) {
-                resolve(scanDir(absoluteRoute));
-            } else if (isFile(absoluteRoute) && isMd(absoluteRoute)) {
-                resolve(extractLinks(absoluteRoute));
-            } else if (isFile(absoluteRoute) && !isMd(absoluteRoute)) {
-                throw new Error('Path is not an .md file');
-            }
+            resolve(rawLinks);
             break;
         case true:
-            if (isDirectory(absoluteRoute)) {
-                scanDir(absoluteRoute);
-                const validatedLinks = validateMyLinks(extractedLinks)
-                .then(validatedLinks => resolve(validatedLinks))
-                .catch(err => console.log(err))
-            } else if (isFile(absoluteRoute) && isMd(absoluteRoute)) {
-                extractLinks(absoluteRoute);
-                const validatedLinks = validateMyLinks(extractedLinks)
-                .then(validatedLinks => resolve(validatedLinks))
-                .catch(err => console.log(err))
-            } else if (isFile(absoluteRoute) && !isMd(absoluteRoute)) {
-                throw new Error('Path is not an .md file');
-            }
+            const validatedLinks = validateMyLinks(rawLinks)
+            .then(validatedLinks => resolve(validatedLinks))
+            .catch(err => console.log(err))
+            break;
     }
 
     if (extractedLinks.length < 1) {
