@@ -30,3 +30,27 @@ export const mdLinks = (route, validate) => new Promise ((resolve, reject) => {
         throw new Error('No links were found');
     }
 });
+
+export const reportStats = (route, validate) => new Promise ((resolve, reject) => {
+    let statsObject = {};
+
+    const findDuplicates = (arr) => arr.filter((item, index) => arr.indexOf(item) !== index);
+
+    const returnedLinks = mdLinks(route, validate)
+    .then(returnedLinks => {
+        const dupliiicates = findDuplicates(returnedLinks);
+        statsObject.total = returnedLinks.length;
+        statsObject.unique = statsObject.total - dupliiicates.length;
+        if (validate) {
+            let broken = 0;
+            returnedLinks.forEach(linkObj => {
+                if (linkObj.ok != 'OK') {
+                    broken ++;
+                }
+            });
+            statsObject.broken = broken;
+        }
+        resolve(statsObject);
+    })
+    .catch(error => console.log(`Error detected! ${error}`));
+});
