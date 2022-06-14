@@ -15,6 +15,11 @@ export const mdLinks = (route, validate) => new Promise ((resolve, reject) => {
         throw new Error('Path is not an .md file');
     }
 
+    if (extractedLinks.length < 1) {
+        console.log('nolinks')
+        throw new Error('No links were found');
+    }
+
     switch (validate) {
         case false:
             resolve(rawLinks);
@@ -24,10 +29,6 @@ export const mdLinks = (route, validate) => new Promise ((resolve, reject) => {
             .then(validatedLinks => resolve(validatedLinks))
             .catch(err => console.log(err))
             break;
-    }
-
-    if (extractedLinks.length < 1) {
-        throw new Error('No links were found');
     }
 });
 
