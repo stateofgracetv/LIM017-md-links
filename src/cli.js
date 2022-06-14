@@ -7,10 +7,7 @@ const commands = process.argv;
 
 const pathToFile = commands[2];
 
-const findFlags = (key) => {
-  if (commands.includes(`--${ key }`)) return true;
-  else return false;
-}
+const findFlags = key => commands.includes(`--${ key }`) ? true : false;
 
 let validate = findFlags('validate');
 let stats = findFlags('stats');
