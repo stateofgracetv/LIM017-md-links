@@ -102,4 +102,8 @@ describe('scanDir', () => {
     expect(scanDir('C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples')).toEqual(expect.arrayContaining(expectedArray));
   })
 
+  it('should return null when called with and empty directory', () => {
+    expect(scanDir('C:\\Users\\USUARIO\\Documents\\Code\\LIM017-md-links\\my-examples\\empty-dir')).toBe(null);
+  })
+
 })

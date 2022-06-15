@@ -16,7 +16,6 @@ export const mdLinks = (route, validate) => new Promise ((resolve, reject) => {
     }
 
     if (extractedLinks.length < 1) {
-        console.log('nolinks')
         throw new Error('No links were found');
     }
 

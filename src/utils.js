@@ -14,8 +14,8 @@ export const isMd = (route) => path.extname(route) === '.md';
 
 export const scanDir = (route) => {
     const dirList = fs.readdirSync(route);
-    if (!dirList) {
-        return;
+    if (dirList.length < 1) {
+        return null;
     }
     let links;
     dirList.forEach(el => {
@@ -37,7 +37,7 @@ export const extractLinks = (file) => {
     const textExp = /(?<=\[).*(?=\])/gm;
     const arrayOfLinks = data.match(masterExp);
     if (!arrayOfLinks) {
-        return;
+        return null;
     }
     else {
         arrayOfLinks.forEach(e => {
