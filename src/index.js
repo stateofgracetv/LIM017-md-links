@@ -6,11 +6,10 @@ export const mdLinks = (route, validate) => new Promise ((resolve, reject) => {
         throw new Error("Invalid: Path does not exist");
     }
     
-    let rawLinks;
     if (isDirectory(absoluteRoute)) {
-        rawLinks = scanDir(absoluteRoute);
+        scanDir(absoluteRoute);
     } else if (isFile(absoluteRoute) && isMd(absoluteRoute)) {
-        rawLinks = extractLinks(absoluteRoute);
+        extractLinks(absoluteRoute);
     } else if (isFile(absoluteRoute) && !isMd(absoluteRoute)) {
         throw new Error('Path is not an .md file');
     }
@@ -21,10 +20,10 @@ export const mdLinks = (route, validate) => new Promise ((resolve, reject) => {
 
     switch (validate) {
         case false:
-            resolve(rawLinks);
+            resolve(extractedLinks);
             break;
         case true:
-            const validatedLinks = validateMyLinks(rawLinks)
+            const validatedLinks = validateMyLinks(extractedLinks)
             .then(validatedLinks => resolve(validatedLinks))
             .catch(err => console.log(err))
             break;
