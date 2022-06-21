@@ -1,5 +1,5 @@
 import path from 'path';
-import fs, { link } from 'fs';
+import fs from 'fs';
 import fetch from 'node-fetch';
 
 export const absolutify = (route) => path.isAbsolute(route) ? route : path.resolve(route);

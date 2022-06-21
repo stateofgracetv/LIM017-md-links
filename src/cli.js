@@ -17,7 +17,6 @@ function execute() {
     case false:
       const result = mdLinks(pathToFile, validate)
       .then(result => {
-        // console.log(result)
         const numKeys = Object.keys(result[0]).length;
         switch (numKeys) {
           case 3: // no validate
